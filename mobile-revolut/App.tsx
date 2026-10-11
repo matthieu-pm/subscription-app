@@ -1832,18 +1832,32 @@ function AppContent() {
               </ScrollView>
             </BlurTargetView>
             <View style={s.fixedHeader}>
-              <BlurView
-                pointerEvents="none"
-                intensity={80}
-                tint={data.appearance === "light" ? "light" : "dark"}
-                style={[StyleSheet.absoluteFill, { top: -headerInset }]}
-                {...(Platform.OS === "android"
-                  ? {
-                      blurTarget: headerBlurTarget,
-                      blurMethod: "dimezisBlurViewSdk31Plus" as const,
-                    }
-                  : {})}
-              />
+              {Platform.OS === "web" ? (
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    top: -headerInset,
+                    pointerEvents: "none",
+                    backdropFilter: "blur(16px)",
+                    WebkitBackdropFilter: "blur(16px)",
+                  }}
+                />
+              ) : (
+                <BlurView
+                  pointerEvents="none"
+                  intensity={80}
+                  tint="default"
+                  style={[StyleSheet.absoluteFill, { top: -headerInset }]}
+                  {...(Platform.OS === "android"
+                    ? {
+                        blurTarget: headerBlurTarget,
+                        blurMethod: "dimezisBlurViewSdk31Plus" as const,
+                      }
+                    : {})}
+                />
+              )}
               {route === "home" ? (
                 <View style={s.topbar}>
                   <Pressable
