@@ -558,16 +558,7 @@ function AppContent() {
             style={{ flex: 1 }}
             behavior={Platform.OS === "ios" ? "padding" : undefined}
           >
-            <ScrollView
-              ref={scroll}
-              contentContainerStyle={[
-                s.content,
-                route === "welcome" && { flexGrow: 1 },
-                tabs.includes(route) && { paddingBottom: 110 + insets.bottom },
-              ]}
-              showsVerticalScrollIndicator={false}
-              keyboardShouldPersistTaps="handled"
-            >
+            <View style={s.fixedHeader}>
               {route === "home" ? (
                 <View style={s.topbar}>
                   <Pressable
@@ -652,6 +643,17 @@ function AppContent() {
                   )}
                 </View>
               )}
+            </View>
+            <ScrollView
+              ref={scroll}
+              contentContainerStyle={[
+                s.content,
+                route === "welcome" && { flexGrow: 1 },
+                tabs.includes(route) && { paddingBottom: 110 + insets.bottom },
+              ]}
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+            >
               {title[route] && (
                 <T accessibilityRole="header" style={s.title}>
                   {title[route]}
@@ -2072,6 +2074,7 @@ const createStyles = (c: Palette) =>
     },
     text: { fontFamily: "Geist_400Regular", fontSize: 16, color: c.text },
     content: { paddingHorizontal: 16, paddingBottom: 40 },
+    fixedHeader: { paddingHorizontal: 16, flexShrink: 0 },
     topbar: {
       flexDirection: "row",
       alignItems: "center",
