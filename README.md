@@ -1,5 +1,11 @@
 # Subscript
 
+## Repository and shared testing
+
+This repository contains both prototypes. Vercel serves the current Expo app from `mobile-revolut`; the root Vite app is the earlier design. The GitHub repository is https://github.com/matthieu-pm/subscription-app.
+
+To update the shared app, commit and push to `main`. Vercel builds `mobile-revolut` using `npm ci` and `npm run build:web`, then publishes `dist`. No backend or environment variables are needed.
+
 A mobile-first subscription-management prototype built with React, TypeScript, and Vite. The latest direction uses light finance surfaces, white grouped cards, a charcoal summary card, and floating black navigation. Bold condensed headings, yellow highlights, and outlined actions carry through login, onboarding, subscription details, profile, and settings. Welcome and authentication include graphic artwork and split arrow buttons from the supplied taxi-app reference. DM Sans and Barlow Condensed are bundled locally. The earlier Revolut styling direction was superseded.
 
 ## Run
