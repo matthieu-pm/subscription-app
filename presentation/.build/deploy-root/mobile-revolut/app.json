@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Subscript",
+    "slug": "subscript",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/welcome-hero.png",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.subscript.revolutprototype"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/welcome-hero.png"
+    },
+    "plugins": [
+      "expo-font"
+    ],
+    "scheme": "subscript",
+    "extra": {
+      "eas": {
+        "projectId": "11e10e1e-55aa-4565-9b11-010004cde33e"
+      }
+    },
+    "owner": "forge-dev"
+  }
+}

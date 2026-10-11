@@ -83,3 +83,15 @@ Users can add personal and joint demo accounts at the same bank or across banks 
 ## Alternative native iPhone prototype
 
 The independent Revolut-style React Native app is in [`mobile-revolut`](mobile-revolut/README.md). It uses Geist and Hugeicons. Run `npm run mobile`, then open its QR in Expo Go on iPhone. The original Vite app continues to use `npm run dev`.
+
+## Content refresh from the Revolut prototype
+
+The yellow-and-black app now uses the local `mobile-revolut/App.tsx` prototype as a content reference: direct screen titles, account-oriented setup, clear payment labels, and explicit cancellation outcomes. Its existing visual styling is retained.
+
+- Sign-in and setup explain the sample profile and demo code without implying that an email was sent or a bank was accessed.
+- Choosing **Use sample subscriptions** now opens the same review step as connecting an account, with copy that reflects whether any accounts are connected.
+- **Edit subscription** updates tracking details; **Stop tracking subscription** removes an item from the list and totals while retaining payment history.
+- Cancellation separates the provider action from **Mark as cancelled** in Subscript. Success confirms the updated total and where to find past payments.
+- Help covers monthly equivalents, estimated renewals, multiple accounts, and cancellation. For example, a €120 yearly plan contributes €10 to the monthly total.
+
+Validation: production build, seven model tests, and diff checks pass. Browser checks covered email sign-in, sample-only setup, Apple TV detail/edit/cancellation, the €39 → €29 total, profile/settings, and expanded help answers. Inspected welcome/home/cancellation at 390 × 844 and settings/help at 320 × 700; the narrow page width remained 320 px and the test tab reported no console errors or warnings. Screenshots: `screenshots/content-home.jpg` and `screenshots/content-cancellation.jpg`. No changes were made to the native Revolut prototype.

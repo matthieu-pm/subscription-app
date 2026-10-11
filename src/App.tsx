@@ -200,7 +200,7 @@ export default function App() {
     setAccount(defaultAccount);
     setScreen("welcome");
     if (scroll.current) scroll.current.scrollTop = 0;
-    setToast("Demo reset. Start again whenever you’re ready.");
+    setToast("Demo reset. Sample subscriptions restored.");
   };
   const save = (event: React.FormEvent) => {
     event.preventDefault();
@@ -228,13 +228,13 @@ export default function App() {
         : "detail";
   const title =
     screen === "edit"
-      ? "Edit details"
+      ? "Edit subscription"
       : screen === "add"
         ? "Add subscription"
         : screen === "cancel"
           ? "How to cancel"
           : screen === "confirm"
-            ? "Confirm cancellation"
+            ? "Record cancellation"
             : screen === "provider"
               ? "Provider preview"
               : "Subscription";
@@ -245,8 +245,8 @@ export default function App() {
         <strong>{s.name}</strong>
         <span>
           {s.status === "cancelled"
-            ? "Cancelled · reported by you"
-            : `${s.dateSource === "estimated" ? "Est. next" : "Next"} ${dateLabel(s.renewal)}`}
+            ? "Marked as cancelled"
+            : `${s.dateSource === "estimated" ? "Est. renewal" : "Renews"} ${dateLabel(s.renewal)}`}
         </span>
       </span>
       <span className="row-price">
@@ -266,82 +266,7 @@ export default function App() {
         event.currentTarget.dataset.input = "keyboard";
       }}
     >
-      <header className="desktop-header">
-        <a
-          className="wordmark"
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            go(account.signedIn ? "home" : "welcome");
-          }}
-        >
-          <span className="brand-mark">s</span>subscript
-          <span className="wordmark-dot">.</span>
-        </a>
-        <span className="prototype-label">
-          <span />
-          Interactive prototype
-        </span>
-      </header>
       <div className="stage-layout">
-        <aside className="stage-note">
-          <span className="eyebrow">LESS ADMIN. MORE LIVING.</span>
-          <h2>
-            Your subscriptions.
-            <br />A little more
-            <br />
-            <em>under control.</em>
-          </h2>
-          <p>
-            One place for the things you pay for.
-            <br />
-            And the ones you’re ready to part with.
-          </p>
-          <div className="demo-guide">
-            <span className="guide-arrow">↗</span>
-            <p>
-              From the first hello
-              <br />
-              to a little less admin.
-              <br />
-              Try the complete mobile journey.
-            </p>
-          </div>
-          <div className="flow-shortcuts" aria-label="Prototype flow shortcuts">
-            <span>EXPLORE THE PROTOTYPE</span>
-            <button
-              onClick={() => {
-                updateAccount({ signedIn: false, onboarded: false });
-                go("welcome");
-              }}
-            >
-              01 <span>Login & onboarding</span>
-              <ArrowUpRight size={16} />
-            </button>
-            <button
-              onClick={() => {
-                updateAccount({ signedIn: true, onboarded: true });
-                go("home");
-              }}
-            >
-              02 <span>Subscriptions</span>
-              <ArrowUpRight size={16} />
-            </button>
-            <button
-              onClick={() => {
-                updateAccount({ signedIn: true, onboarded: true });
-                go("profile");
-              }}
-            >
-              03 <span>Profile & settings</span>
-              <ArrowUpRight size={16} />
-            </button>
-          </div>
-          <div className="demo-note">
-            <ShieldCheck size={16} />
-            <span>Demo data. No real payments or account changes.</span>
-          </div>
-        </aside>
         <div className="phone-wrap">
           <div className={`phone ${showNav ? "has-bottom-nav" : ""}`}>
             <div className="status-bar" aria-hidden="true">
@@ -392,8 +317,8 @@ export default function App() {
                         .toUpperCase()}
                     </button>
                     <span className="home-greeting">
-                      Hello, {account.name.split(" ")[0]}
-                      <small>Let’s keep things in check.</small>
+                      Hey, {account.name.split(" ")[0]}
+                      <small>Let’s see what’s coming up.</small>
                     </span>
                     <button
                       className="icon-button"
@@ -424,12 +349,12 @@ export default function App() {
                   <main className="home page">
                     <div className="home-heading">
                       <span className="eyebrow">
-                        A LITTLE CLARITY GOES A LONG WAY
+                        THE USUAL SUSPECTS
                       </span>
                       <h1 className="display-heading" tabIndex={-1}>
-                        Your subscriptions.
+                        All your
                         <br />
-                        <mark>All in sight.</mark>
+                        <mark>subscriptions.</mark>
                       </h1>
                     </div>
                     <section
@@ -437,7 +362,7 @@ export default function App() {
                       aria-label="Subscription totals"
                     >
                       <div className="total-top">
-                        <span>Recurring cost</span>
+                        <span>Subscription total</span>
                         <div
                           className="period-toggle"
                           aria-label="Total period"
@@ -465,7 +390,7 @@ export default function App() {
                         <span>
                           {period === "monthly"
                             ? "Monthly equivalent"
-                            : "Yearly equivalent"}
+                            : "Yearly projection"}
                           <small>
                             {period === "monthly"
                               ? "Annual plans spread across 12 months."
@@ -543,13 +468,13 @@ export default function App() {
                           <Sprout size={28} />
                           <h3>
                             {query
-                              ? "No subscriptions found"
-                              : "No active subscriptions"}
+                              ? "No match this time"
+                              : "Who’s first?"}
                           </h3>
                           <p>
                             {query
                               ? "Try a different name or clear your search."
-                              : "Add a subscription to track its cost and renewal date."}
+                              : "Streaming, storage, that thing you signed up for. Add a subscription to keep it in sight."}
                           </p>
                         </div>
                       )}
@@ -601,7 +526,7 @@ export default function App() {
                     {screen === "detail" ? (
                       <button
                         className="icon-button"
-                        aria-label="Edit details"
+                        aria-label="Edit subscription"
                         onClick={edit}
                       >
                         <Pencil size={20} />
@@ -620,7 +545,7 @@ export default function App() {
                           >
                             <span />
                             {sub.status === "cancelled"
-                              ? "Cancelled · reported by you"
+                              ? "Marked as cancelled"
                               : "Active"}
                           </span>
                           <h1 className="display-heading" tabIndex={-1}>
@@ -649,7 +574,7 @@ export default function App() {
                             <div className="card-top">
                               <span>
                                 <CalendarDays size={16} />
-                                Next expected charge
+                                Next payment
                               </span>
                               <span className="tag">
                                 {sub.dateSource === "user"
@@ -668,21 +593,21 @@ export default function App() {
                             </div>
                             <p>
                               {sub.dateSource === "estimated"
-                                ? "Based on your previous payment. The next date and amount may change."
-                                : "Using the renewal date you provided. The provider may change the actual charge."}
+                                ? "Estimated from the last payment. The date and amount may change."
+                                : "You set this renewal date. Check with your provider for the final amount."}
                             </p>
                           </section>
                         ) : (
                           <section className="cancelled-card">
                             <Check size={20} />
                             <div>
-                              <strong>Excluded from future totals</strong>
+                              <strong>Removed from upcoming totals</strong>
                               <p>
                                 {sub.accessEnd
                                   ? `Access until ${dateLabel(sub.accessEnd, true)}. `
                                   : ""}
-                                You reported this cancellation. We haven’t
-                                confirmed it with the provider.
+                                Marked as cancelled by you. Your payment history
+                                stays here.
                               </p>
                             </div>
                           </section>
@@ -701,7 +626,7 @@ export default function App() {
                         <section className="detail-section history">
                           <div className="section-heading">
                             <h2>Payment history</h2>
-                            <span className="plain-label">Observed</span>
+                            <span className="plain-label">Sample payments</span>
                           </div>
                           {sub.history.length ? (
                             sub.history.map((h, i) => (
@@ -717,16 +642,17 @@ export default function App() {
                               </div>
                             ))
                           ) : (
-                            <p className="helper">No observed payments yet.</p>
+                            <p className="helper">No payments recorded yet.</p>
                           )}
                           <p className="helper">
-                            Observed charges from your sample account.
+                            Past payments from the demo data, not upcoming
+                            charges.
                           </p>
                         </section>
                         <div className="bottom-actions">
                           <button className="button primary" onClick={edit}>
                             <Pencil size={16} />
-                            Edit details
+                            Edit subscription
                           </button>
                           {sub.status === "active" && (
                             <button
@@ -760,8 +686,8 @@ export default function App() {
                         </h1>
                         <p className="intro">
                           {screen === "add"
-                            ? "Enter the amount you pay and how often it renews."
-                            : "Update the details below. This won’t change your plan with the provider."}
+                            ? "One less thing to keep in your head. Add what you pay and when it renews."
+                            : "Something changed? Update your details here. To change your plan or price, contact the provider."}
                         </p>
                         <form onSubmit={save}>
                           <label>
@@ -828,8 +754,8 @@ export default function App() {
                               }
                             />
                             <small>
-                              Changing this date replaces our estimate with “Set
-                              by you.”
+                              Enter the date shown by your provider. We’ll label
+                              it “Set by you.”
                             </small>
                           </label>
                           {screen === "edit" && (
@@ -847,7 +773,7 @@ export default function App() {
                               >
                                 <option value="active">Active</option>
                                 <option value="cancelled">
-                                  Cancelled — reported by you
+                                  Marked as cancelled
                                 </option>
                               </select>
                             </label>
@@ -855,8 +781,8 @@ export default function App() {
                           {draft.status === "cancelled" && (
                             <p className="inline-info">
                               <Info size={20} />
-                              Updating the status here won’t cancel billing with
-                              the provider.
+                              Cancel with your provider first. Changing this
+                              status won’t stop payments.
                             </p>
                           )}
                           <div className="bottom-actions">
@@ -883,7 +809,7 @@ export default function App() {
                                 type="button"
                                 onClick={() => setDialog("remove")}
                               >
-                                This isn’t a subscription
+                                Stop tracking subscription
                               </button>
                             )}
                           </div>
@@ -896,45 +822,47 @@ export default function App() {
                           <Brand brand={sub.brand} />
                           <span>{sub.name}</span>
                         </div>
-                        <span className="eyebrow">A TWO-STEP HANDOFF</span>
+                        <span className="eyebrow">
+                          CANCEL, THEN UPDATE SUBSCRIPT
+                        </span>
                         <h1 className="display-heading" tabIndex={-1}>
                           Cancel with
                           <br />
                           <mark>the provider.</mark>
                         </h1>
                         <p className="intro">
-                          To stop billing, cancel with {sub.name}. Updating this
-                          app alone won’t cancel your subscription.
+                          Cancel with the company that bills you for {sub.name},
+                          then record it here. Subscript can’t stop payments for
+                          you.
                         </p>
                         <div className="step">
                           <span className="step-number">1</span>
                           <div>
-                            <h2>Cancel your plan with the provider</h2>
+                            <h2>Cancel with your provider</h2>
                             <p>
-                              Sign in with the provider and look for{" "}
-                              <strong>Account</strong> or{" "}
-                              <strong>Subscriptions</strong>. Follow their
+                              Sign in to the account you subscribed with. Find{" "}
+                              <strong>Subscriptions</strong> and follow the
                               cancellation steps.
                             </p>
                             <button
                               className="button primary"
                               onClick={() => go("provider")}
                             >
-                              Preview provider website
+                              Preview provider page
                               <ExternalLink size={16} />
                             </button>
                             <small className="simulation-note">
-                              Opens a simulated provider page in this demo.
+                              Demo preview. No provider website will open.
                             </small>
                           </div>
                         </div>
                         <div className="step">
                           <span className="step-number">2</span>
                           <div>
-                            <h2>Update your status here</h2>
+                            <h2>Record your cancellation</h2>
                             <p>
-                              Once you’ve cancelled with them, come back and
-                              update your subscription here.
+                              After the provider confirms cancellation, mark it
+                              as cancelled here to update your totals.
                             </p>
                             <button
                               className="button secondary"
@@ -949,8 +877,9 @@ export default function App() {
                           </div>
                         </div>
                         <p className="inline-info">
-                          <Info size={20} />A website visit alone won’t change
-                          your status here.
+                          <Info size={20} />
+                          Opening the preview won’t cancel your plan or change
+                          its status.
                         </p>
                       </>
                     )}
@@ -969,19 +898,19 @@ export default function App() {
                             SIMULATED PROVIDER WEBSITE
                           </span>
                           <h1 className="display-heading" tabIndex={-1}>
-                            Your provider,
+                            Provider
                             <br />
-                            <mark>previewed.</mark>
+                            <mark>preview.</mark>
                           </h1>
                           <p className="intro">
-                            This is where you’d sign in and cancel your plan
-                            directly with {sub.name}.
+                            In a live app, you’d continue to the company that
+                            bills you for {sub.name}.
                           </p>
                           <div className="provider-boundary">
                             <ShieldCheck size={24} />
                             <p>
-                              This is a preview. No provider was contacted, and
-                              nothing in Subscript has changed.
+                              No cancellation has been made. This demo doesn’t
+                              contact the provider.
                             </p>
                           </div>
                           <button
@@ -1006,9 +935,8 @@ export default function App() {
                           <mark>cancelled?</mark>
                         </h1>
                         <p className="intro">
-                          We’ll stop predicting future payments for{" "}
-                          <strong>{sub.name}</strong>. Past payments stay in
-                          your history.
+                          Remove <strong>{sub.name}</strong> from upcoming
+                          totals. Your payment history will stay in Activity.
                         </p>
                         <form
                           onSubmit={(e) => {
@@ -1036,8 +964,8 @@ export default function App() {
                           <div className="inline-info">
                             <Info size={20} />
                             <p>
-                              This records what you tell us. It doesn’t contact
-                              the provider or stop billing on its own.
+                              Only continue after cancelling with your provider.
+                              This action updates Subscript only.
                             </p>
                           </div>
                           <div className="bottom-actions">
@@ -1070,18 +998,20 @@ export default function App() {
                         </div>
                         <span className="eyebrow">CANCELLATION RECORDED</span>
                         <h1 className="display-heading" tabIndex={-1}>
-                          Marked as
+                          That’s
                           <br />
-                          <mark>cancelled.</mark>
+                          <mark>noted.</mark>
                         </h1>
                         <p className="intro">
-                          {sub.name} is marked as cancelled.
+                          {sub.name} is marked as cancelled and out of your
+                          upcoming totals. One less thing to keep track of.
                           <br />
-                          Reported by you. Not verified with the provider.
+                          Cancellation reported by you, not verified with the
+                          provider.
                         </p>
                         <section className="success-summary">
                           <div>
-                            <span>New monthly equivalent</span>
+                            <span>Updated monthly total</span>
                             <strong>
                               {money(totalFor(items, "monthly"))}
                               <small>/mo</small>
@@ -1097,14 +1027,14 @@ export default function App() {
                           </p>
                         )}
                         <p className="helper">
-                          Payment history is preserved. You’ll find {sub.name}{" "}
-                          in your cancelled subscriptions.
+                          Find {sub.name} under Cancelled. Past payments remain
+                          in Activity.
                         </p>
                         <button
                           className="button primary"
                           onClick={() => go("home")}
                         >
-                          Back to Home
+                          Back to subscriptions
                           <ArrowRight size={20} />
                         </button>
                         <button
@@ -1180,12 +1110,12 @@ export default function App() {
               <h2 id="dialog-title">
                 {dialog === "reset"
                   ? "Reset this demo?"
-                  : "Remove from subscriptions?"}
+                  : "Stop tracking this subscription?"}
               </h2>
               <p>
                 {dialog === "reset"
-                  ? "This resets the sample subscriptions, profile, and preferences, then restarts onboarding."
-                  : `${sub.name} will be removed from subscription totals and predictions. This won’t cancel billing or delete observed payment history.`}
+                  ? "Your edits, connected accounts, and preferences will be cleared. The original sample subscriptions will be restored."
+                  : `${sub.name} will leave your list and totals. Past payments stay in Activity. This won’t cancel your plan with the provider.`}
               </p>
               <button
                 className="button primary"
@@ -1195,39 +1125,22 @@ export default function App() {
                     update({ ...sub, status: "removed" });
                     setDialog(null);
                     go("home");
-                    setToast(
-                      "Removed from subscriptions. Payment history kept.",
-                    );
+                    setToast("Tracking stopped. Payment history kept.");
                   }
                 }}
               >
-                {dialog === "reset"
-                  ? "Reset demo"
-                  : "Remove from subscriptions"}
+                {dialog === "reset" ? "Reset demo" : "Stop tracking"}
               </button>
               <button
                 className="button secondary"
                 onClick={() => setDialog(null)}
               >
-                {dialog === "reset" ? "Keep current demo" : "Keep subscription"}
+                {dialog === "reset" ? "Keep current demo" : "Keep tracking"}
               </button>
             </dialog>
           </div>
-          <div className="under-phone">
-            <span>SUBSCRIPT / MOBILE PROTOTYPE</span>
-            <button onClick={() => setDialog("reset")}>
-              <RotateCcw size={16} />
-              Reset demo
-            </button>
-          </div>
         </div>
       </div>
-      <footer className="desktop-footer">
-        <span>A little clarity. A lot less admin.</span>
-        <span>
-          MADE FOR EVERYDAY PEACE OF MIND <span>↗</span>
-        </span>
-      </footer>
     </div>
   );
 }

@@ -644,3 +644,27 @@ button:focus-visible .icon-swap > span,
   min-height: 48px;
   padding-bottom: 8px;
 }
+
+/* Show only the interactive prototype, centered in desktop browsers. */
+@media (min-width: 761px) {
+  .stage {
+    display: grid;
+    place-items: center;
+    min-height: 100svh;
+    padding: 24px;
+  }
+  .stage-layout {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    justify-content: center;
+    gap: 0;
+  }
+  .phone-wrap {
+    width: 408px;
+    zoom: 1;
+  }
+  .phone {
+    height: min(844px, calc(100svh - 48px));
+  }
+}

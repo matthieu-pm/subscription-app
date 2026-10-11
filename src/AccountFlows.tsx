@@ -135,7 +135,7 @@ function Progress({ step }: { step: number }) {
     "Your profile",
     "Connect accounts",
     "Reminders",
-    "Ready to go",
+    "Review setup",
   ];
   return (
     <div className="setup-progress">
@@ -239,7 +239,7 @@ export default function AccountFlows({
     notifications: "Notifications",
     accounts: "Connected accounts",
     privacy: "Privacy & security",
-    help: "A little help",
+    help: "Help & support",
     activity: "Payment activity",
     banks: "Choose your bank",
     "bank-consent": "Connect an account",
@@ -258,7 +258,7 @@ export default function AccountFlows({
     banks: inSetup ? "connect" : "accounts",
     "bank-consent": "banks",
     detected: inSetup ? "connect" : "accounts",
-    "reminders-setup": account.connections.length ? "detected" : "connect",
+    "reminders-setup": "detected",
     ready: "reminders-setup",
     profile: "home",
     "edit-profile": "profile",
@@ -324,18 +324,18 @@ export default function AccountFlows({
         {route === "welcome" && (
           <>
             <div className="welcome-topline">
-              <span className="eyebrow">GOODBYE, SUBSCRIPTION CHAOS.</span>
+              <span className="eyebrow">LESS “WAIT, I PAY FOR THAT?”</span>
               <span className="dot-pattern" />
             </div>
             <h1 className="display-heading" tabIndex={-1}>
-              LESS ADMIN.
+              THEY RENEW.
               <br />
-              MORE <mark>LIVING.</mark>
+              <mark>YOU REMEMBER.</mark>
             </h1>
             <p className="intro">
-              All your subscriptions in one place.
+              Your subscriptions have a way of adding up.
               <br />
-              Keep the good stuff. Let the rest go.
+              Let’s keep them in sight.
             </p>
             <div className="subscription-art" aria-hidden="true">
               <span className="art-orbit" />
@@ -346,7 +346,7 @@ export default function AccountFlows({
               </div>
               <div className="art-slip slip-front">
                 <span className="slip-label">
-                  THE MONTHLY LINE-UP <Check size={16} />
+                  YOUR RECURRING PAYMENTS <Check size={16} />
                 </span>
                 <div>
                   <span className="art-logo apple"></span>
@@ -394,7 +394,7 @@ export default function AccountFlows({
               <span className="eyebrow">
                 {route === "login"
                   ? "PICK UP WHERE YOU LEFT OFF"
-                  : "MAKE ROOM FOR WHAT MATTERS"}
+                  : "WELCOME TO SUBSCRIPT"}
               </span>
               <h1 className="display-heading" tabIndex={-1}>
                 {route === "login" ? (
@@ -405,9 +405,9 @@ export default function AccountFlows({
                   </>
                 ) : (
                   <>
-                    YOUR MONEY.
+                    LET’S GET
                     <br />
-                    <mark>YOUR CALL.</mark>
+                    <mark>STARTED.</mark>
                   </>
                 )}
               </h1>
@@ -417,8 +417,8 @@ export default function AccountFlows({
             </div>
             <p className="intro">
               {route === "login"
-                ? "Sign in to manage your subscriptions."
-                : "Create your profile. See what renews next."}
+                ? "Good to see you. Let’s see what’s coming up."
+                : "A little setup now. Less “what was that charge?” later."}
             </p>
             <div className="social-buttons">
               <button
@@ -456,8 +456,7 @@ export default function AccountFlows({
             </button>
             <p className="demo-disclosure">
               <ShieldCheck size={16} />
-              Prototype only. No real accounts are created and no credentials
-              are requested.
+              Demo sign-in. No real account or password needed.
             </p>
             <p className="auth-switch">
               {route === "login"
@@ -484,12 +483,12 @@ export default function AccountFlows({
             </div>
             <span className="eyebrow">SIMULATED SIGN-IN</span>
             <h1 className="display-heading" tabIndex={-1}>
-              Choose your
+              Use your
               <br />
-              <mark>demo account.</mark>
+              <mark>demo profile.</mark>
             </h1>
             <p className="intro">
-              Preview signing in with {provider} using the sample account below.
+              Meet your stand-in. Try {provider} sign-in with this sample profile.
             </p>
             <div
               className="demo-account"
@@ -517,7 +516,7 @@ export default function AccountFlows({
               </p>
               <p>
                 <LockKeyhole size={20} />
-                No password shared with Subscript
+                No password needed
               </p>
             </div>
             <button className="button primary" onClick={() => signIn(provider)}>
@@ -546,9 +545,7 @@ export default function AccountFlows({
               <mark>email.</mark>
             </h1>
             <p className="intro">
-              Sign in with a one-time code.
-              <br />
-              One less password to remember.
+              One email address. No new password to remember.
             </p>
             <form
               noValidate
@@ -598,8 +595,7 @@ export default function AccountFlows({
             </form>
             <p className="demo-disclosure">
               <ShieldCheck size={16} />
-              Demo only. No email will be sent. You can use the sample address
-              above.
+              Your inbox can sit this one out. No email is sent. Try alex@subscript.demo.
             </p>
           </>
         )}
@@ -614,7 +610,7 @@ export default function AccountFlows({
               <mark>demo code.</mark>
             </h1>
             <p className="intro">
-              Enter the six-digit code for
+              Use 123456 to continue as
               <br />
               <strong>{email}</strong>
             </p>
@@ -686,11 +682,11 @@ export default function AccountFlows({
         {route === "onboard-name" && (
           <>
             <Progress step={1} />
-            <span className="eyebrow">YOUR PROFILE</span>
+            <span className="eyebrow">ACCOUNT SETUP</span>
             <h1 className="display-heading" tabIndex={-1}>
-              LET’S MAKE
+              Let’s make
               <br />
-              THIS <mark>YOURS.</mark>
+              <mark>this yours.</mark>
             </h1>
             <p className="intro">What should we call you?</p>
             <form
@@ -715,9 +711,9 @@ export default function AccountFlows({
               <div className="friendly-card">
                 <Leaf size={25} />
                 <p>
-                  A clearer view of your subscriptions.
+                  You can change your name anytime
                   <br />
-                  Set it up once. Adjust it anytime.
+                  in Personal details.
                 </p>
               </div>
               <Action type="submit">Save and continue</Action>
@@ -727,15 +723,15 @@ export default function AccountFlows({
         {route === "connect" && (
           <>
             <Progress step={2} />
-            <span className="eyebrow">LESS MANUAL. MORE HELPFUL.</span>
+            <span className="eyebrow">MULTIPLE ACCOUNTS, ONE VIEW</span>
             <h1 className="display-heading" tabIndex={-1}>
-              FIND YOUR
+              Connect your
               <br />
-              <mark>SUBSCRIPTIONS.</mark>
+              <mark>accounts.</mark>
             </h1>
             <p className="intro">
-              Preview a bank connection to find recurring payments. Review the
-              results before tracking them.
+              Different accounts. Same you. Try a demo connection
+              or take a look around with sample subscriptions.
             </p>
             <div className="connection-art" aria-hidden="true">
               <span>
@@ -748,26 +744,26 @@ export default function AccountFlows({
               <p>
                 <Eye size={20} />
                 <span>
-                  <strong>Read-only access</strong>
-                  <small>View transactions. Never make payments.</small>
+                  <strong>Less hopping between accounts</strong>
+                  <small>Sample transactions only. No real bank access.</small>
                 </span>
               </p>
               <p>
                 <ShieldCheck size={20} />
                 <span>
-                  <strong>Always your choice</strong>
+                  <strong>You’re in control</strong>
                   <small>Disconnect whenever you like.</small>
                 </span>
               </p>
             </div>
-            <Action onClick={() => go("banks")}>Connect an account</Action>
+            <Action onClick={() => go("banks")}>Connect demo account</Action>
             <button
               className="text-button full-width"
               onClick={() => {
-                go("reminders-setup");
+                go("detected");
               }}
             >
-              Skip for now
+              Use sample subscriptions
             </button>
             <p className="helper centered">
               This demo uses sample transactions only.
@@ -782,7 +778,9 @@ export default function AccountFlows({
               <br />
               <mark>bank.</mark>
             </h1>
-            <p className="intro">Choose a bank to preview the connection.</p>
+            <p className="intro">
+              Choose a bank, then select a personal or joint demo account.
+            </p>
             <label className="bank-search">
               Search banks
               <input
@@ -844,15 +842,14 @@ export default function AccountFlows({
             <span className="flow-feature-icon">
               <Landmark size={30} />
             </span>
-            <span className="eyebrow">YOU’RE IN CONTROL</span>
+            <span className="eyebrow">DEMO BANK CONNECTION</span>
             <h1 className="display-heading" tabIndex={-1}>
               Connect
               <br />
               <mark>{bank}.</mark>
             </h1>
             <p className="intro">
-              In the live app, you’d approve read-only access securely with your
-              bank.
+              Choose a demo account to connect. You won’t need banking details.
             </p>
             <fieldset className="bank-account-picker">
               <legend>Choose an account</legend>
@@ -897,7 +894,7 @@ export default function AccountFlows({
               </p>
             )}
             <div className="consent-card">
-              <h2>What Subscript could see</h2>
+              <h2>What a live connection would share</h2>
               <p>
                 <Check size={20} />
                 Account name and masked card details
@@ -950,14 +947,14 @@ export default function AccountFlows({
               <Check size={30} />
             </span>
             <h1 className="display-heading" tabIndex={-1}>
-              Review your
+              Meet your
               <br />
-              <mark>subscriptions.</mark>
+              <mark>regulars.</mark>
             </h1>
             <p className="intro">
-              {selectedConnection.bank} {selectedConnection.name.toLowerCase()}{" "}
-              is connected. You now have {accountCountLabel} connected in this
-              demo.
+              {connectionCount
+                ? `${accountCountLabel} connected. Here’s the sample subscription lineup. Take a look.`
+                : "Here’s a sample lineup to get you started. You can connect an account later in Settings."}
             </p>
             <div className="settings-group detected-list">
               {items
@@ -982,8 +979,8 @@ export default function AccountFlows({
                 ))}
             </div>
             <p className="helper">
-              These are the same sample subscriptions across your accounts.
-              Adding an account won’t duplicate them.
+              Edit or remove these subscriptions anytime. Connecting another
+              account won’t add duplicates.
             </p>
             <Action
               onClick={() => go(inSetup ? "reminders-setup" : "accounts")}
@@ -997,7 +994,8 @@ export default function AccountFlows({
                 go("banks");
               }}
             >
-              <Plus size={20} /> Add another account
+              <Plus size={20} />{" "}
+              {connectionCount ? "Add another account" : "Connect demo account"}
             </button>
           </>
         )}
@@ -1007,30 +1005,30 @@ export default function AccountFlows({
             <span className="flow-feature-icon">
               <Bell size={29} />
             </span>
-            <span className="eyebrow">A HEADS-UP, NOT A NAG</span>
+            <span className="eyebrow">RENEWAL REMINDERS</span>
             <h1 className="display-heading" tabIndex={-1}>
-              BEFORE IT
+              A little
               <br />
-              <mark>RENEWS.</mark>
+              <mark>heads-up.</mark>
             </h1>
             <p className="intro">
-              Choose when you’d like a reminder before an expected payment.
+              Renewals have a habit of sneaking up. How much notice would you like?
             </p>
             <div className="notification-preview">
               <span className="brand-mark">s</span>
               <span>
                 <strong>
                   {reminderExample
-                    ? `${reminderExample.name} is coming up`
+                    ? `${reminderExample.name} renews soon`
                     : "Your renewal reminder"}
                 </strong>
                 <small>
                   {reminderExample
-                    ? `${reminderExample.dateSource === "estimated" ? "Estimated" : "Expected"} ${money(reminderExample.amount)} around ${dateLabel(reminderExample.renewal)}. Review your plan before it renews.`
+                    ? `${money(reminderExample.amount)} ${reminderExample.dateSource === "estimated" ? "estimated around" : "expected on"} ${dateLabel(reminderExample.renewal)}. Review your subscription.`
                     : "Add a subscription to preview its renewal reminder."}
                 </small>
               </span>
-              <span>now</span>
+              <span>Preview</span>
             </div>
             <div className="settings-group">
               <Toggle
@@ -1069,28 +1067,28 @@ export default function AccountFlows({
               </span>
               <span className="dot-pattern" />
             </div>
-            <span className="eyebrow">A LITTLE CLARITY LOOKS GOOD ON YOU</span>
+            <span className="eyebrow">SETUP COMPLETE</span>
             <h1 className="display-heading" tabIndex={-1}>
               ALL SET,
               <br />
               <mark>{firstName.toUpperCase()}.</mark>
             </h1>
             <p className="intro">
-              Your preferences are saved.
+              That’s the setup sorted.
               <br />
-              You can change them anytime in Settings.
+              Your subscriptions have a home here now.
             </p>
             <div className="setup-summary">
               <p>
                 <Check size={16} />
                 {connectionCount
                   ? `${accountCountLabel} connected · demo`
-                  : "Sample data · connect an account later"}
+                  : "Sample subscriptions · no bank connected"}
               </p>
               <p>
                 <Check size={16} />
                 {account.reminders
-                  ? `Reminders set to ${account.reminderDays} ${account.reminderDays === "1" ? "day" : "days"} before`
+                  ? `Reminder preference: ${account.reminderDays} ${account.reminderDays === "1" ? "day" : "days"} before renewal`
                   : "Reminders turned off"}
               </p>
             </div>
@@ -1204,7 +1202,7 @@ export default function AccountFlows({
                 />
               </label>
               <p className="helper">
-                Changes are saved in this browser for the demo.
+                Your profile is saved in this browser only.
               </p>
               <button className="button primary" type="submit">
                 Save details
@@ -1223,12 +1221,12 @@ export default function AccountFlows({
         {route === "settings" && (
           <>
             <h1 className="display-heading" tabIndex={-1}>
-              Make it
+              App
               <br />
-              <mark>your own.</mark>
+              <mark>settings.</mark>
             </h1>
             <p className="intro">
-              Manage your reminders, accounts, and privacy.
+              Make yourself at home. Set things up your way.
             </p>
             <span className="group-label">YOUR PREFERENCES</span>
             <div className="settings-group">
@@ -1269,9 +1267,9 @@ export default function AccountFlows({
             <div className="friendly-card">
               <Sparkles size={24} />
               <p>
-                Your preferences save automatically.
+                One less save button to think about.
                 <br />
-                You can change them anytime.
+                Changes save automatically in this browser.
               </p>
             </div>
           </>
@@ -1282,21 +1280,21 @@ export default function AccountFlows({
               <Bell size={27} />
             </span>
             <h1 className="display-heading" tabIndex={-1}>
-              Reminders,
+              Your
               <br />
-              <mark>your way.</mark>
+              <mark>notifications.</mark>
             </h1>
-            <p className="intro">Choose which updates you’d like and when.</p>
+            <p className="intro">A useful nudge, on your terms. Choose what you hear from us and when.</p>
             <div className="settings-group">
               <Toggle
                 label="Renewal reminders"
-                description="Before an expected subscription payment"
+                description="A heads-up before an expected payment"
                 checked={account.reminders}
                 onChange={() => update({ reminders: !account.reminders })}
               />
               <Toggle
                 label="Monthly email summary"
-                description="Your subscriptions, once a month"
+                description="Your month in subscriptions, in one email"
                 checked={account.emailSummary}
                 onChange={() => update({ emailSummary: !account.emailSummary })}
               />
@@ -1324,13 +1322,12 @@ export default function AccountFlows({
         {route === "accounts" && (
           <>
             <h1 className="display-heading" tabIndex={-1}>
-              Your connected
+              Connected
               <br />
               <mark>accounts.</mark>
             </h1>
             <p className="intro">
-              Connect personal or joint accounts from the same bank or different
-              banks.
+              Personal, joint, here, there. Keep your demo accounts together.
             </p>
             {connectionCount ? (
               <div className="connected-accounts-list">
@@ -1354,7 +1351,7 @@ export default function AccountFlows({
                     </div>
                     <p>
                       <span />
-                      Sample transactions connected
+                      Demo account connected
                     </p>
                     <div className="account-access">
                       <Eye size={16} />
@@ -1376,10 +1373,10 @@ export default function AccountFlows({
             ) : (
               <div className="empty-account">
                 <Landmark size={35} />
-                <h2>No account connected</h2>
+                <h2>No accounts? No rush.</h2>
                 <p>
-                  Your sample subscriptions are still here. Connect a demo
-                  account to try the flow.
+                  Try connecting a demo account, or keep exploring with sample
+                  subscriptions. Your call.
                 </p>
               </div>
             )}
@@ -1392,7 +1389,7 @@ export default function AccountFlows({
               }}
             >
               <Plus size={20} />
-              {connectionCount ? "Add another account" : "Connect an account"}
+              {connectionCount ? "Add another account" : "Connect demo account"}
             </button>
             <p className="helper centered">
               Disconnecting won’t cancel your subscriptions.
@@ -1405,11 +1402,13 @@ export default function AccountFlows({
               <ShieldCheck size={28} />
             </span>
             <h1 className="display-heading" tabIndex={-1}>
-              Your data.
+              Privacy &
               <br />
-              <mark>Your control.</mark>
+              <mark>your data.</mark>
             </h1>
-            <p className="intro">Here’s exactly how this prototype works.</p>
+            <p className="intro">
+              No mystery here. See what’s saved and what stays pretend.
+            </p>
             <div className="privacy-cards">
               <section>
                 <LockKeyhole size={24} />
@@ -1429,7 +1428,7 @@ export default function AccountFlows({
               </section>
               <section>
                 <UserRound size={24} />
-                <h2>You’re in charge</h2>
+                <h2>Manage your connections</h2>
                 <p>
                   Disconnect accounts in Settings. Subscription cancellation
                   must happen with the provider; this app records what you
@@ -1449,28 +1448,44 @@ export default function AccountFlows({
               <HelpCircle size={28} />
             </span>
             <h1 className="display-heading" tabIndex={-1}>
-              A little
+              Glad
               <br />
-              <mark>help.</mark>
+              <mark>you asked.</mark>
             </h1>
             <p className="intro">
-              Answers about your subscriptions and this demo.
+              The “how does this work?” bits, explained.
             </p>
             <div className="faq-list">
               <details>
                 <summary>Does Subscript cancel subscriptions?</summary>
                 <p>
-                  Not directly. Open a subscription and choose “How to cancel”
-                  for the provider handoff. Once you’ve cancelled with the
-                  provider, mark it as cancelled here.
+                  No. Cancel with the company that bills you first. Then choose
+                  “How to cancel” in Subscript and record your cancellation.
+                  Your payment history stays in Activity.
                 </p>
               </details>
               <details>
                 <summary>Why is a renewal “estimated”?</summary>
                 <p>
-                  It’s a prediction based on a previous charge. The provider may
+                  A best guess, based on a previous charge. The provider may
                   change the amount or date. Edit the renewal date to replace it
                   with one set by you.
+                </p>
+              </details>
+              <details>
+                <summary>How is my subscription total calculated?</summary>
+                <p>
+                  Monthly totals spread yearly plans across 12 months. A €120
+                  yearly plan counts as €10 per month. Cancelled and untracked
+                  subscriptions are excluded. This is an estimate, not a bill.
+                </p>
+              </details>
+              <details>
+                <summary>Can I connect multiple accounts?</summary>
+                <p>
+                  Absolutely. Open Connected accounts and choose “Add another account.”
+                  Add personal or joint demo accounts at the same bank or across
+                  banks. Your subscriptions won’t be duplicated.
                 </p>
               </details>
               <details>
@@ -1484,32 +1499,32 @@ export default function AccountFlows({
               <details>
                 <summary>What if something isn’t a subscription?</summary>
                 <p>
-                  Open it, choose “Edit details,” then “This isn’t a
-                  subscription.” It will leave your totals, while its payment
-                  history stays in the demo data.
+                  Open it, choose “Edit subscription,” then “Stop tracking
+                  subscription.” It leaves your list and totals. Past payments
+                  stay in Activity.
                 </p>
               </details>
             </div>
             <div className="friendly-card">
               <Mail size={24} />
               <p>
-                No support messages are sent from this demo. Everything here is
-                yours to explore.
+                This demo doesn’t send support messages. Use the answers above
+                to explore the flow.
               </p>
             </div>
           </>
         )}
         {route === "activity" && (
           <>
-            <span className="eyebrow">OBSERVED PAYMENTS</span>
+            <span className="eyebrow">PAST PAYMENTS</span>
             <h1 className="display-heading" tabIndex={-1}>
               Your payment
               <br />
               <mark>history.</mark>
             </h1>
             <p className="intro">
-              Payments recorded in your sample account. Check each subscription
-              for its next estimated renewal.
+              A little less “what was that charge?” Here are your sample
+              payments, all together.
             </p>
             <div className="settings-group activity-list">
               {items
@@ -1536,7 +1551,7 @@ export default function AccountFlows({
                       <strong>{s.name}</strong>
                       <small>
                         {dateLabel(h.date, true)}
-                        {s.status === "removed" ? " · Not a subscription" : ""}
+                        {s.status === "removed" ? " · Tracking stopped" : ""}
                       </small>
                     </span>
                     <strong>−{money(h.amount)}</strong>
@@ -1544,8 +1559,8 @@ export default function AccountFlows({
                 ))}
             </div>
             <p className="helper">
-              Observed history stays even after a subscription is cancelled or
-              removed from tracking.
+              Payment history stays even after you cancel or stop tracking a
+              subscription.
             </p>
           </>
         )}
@@ -1573,8 +1588,8 @@ export default function AccountFlows({
         </h2>
         <p>
           {modalType === "logout"
-            ? "You’ll return to the welcome screen. Your demo subscriptions and preferences stay in this browser."
-            : `This removes the ${disconnectTarget?.name.toLowerCase() ?? "the account"} ending ${disconnectTarget?.last4 ?? ""}. Your other connections, subscriptions, and payment history stay. No subscriptions will be cancelled.`}
+            ? "Your subscriptions, connected accounts, and preferences stay in this browser for next time."
+            : `Disconnect the ${disconnectTarget?.name.toLowerCase() ?? "account"} ending ${disconnectTarget?.last4 ?? ""}. Your other accounts and payment history stay. This won’t cancel any subscriptions.`}
         </p>
         <button
           className="button primary"
