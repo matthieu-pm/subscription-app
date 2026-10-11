@@ -1,0 +1,646 @@
+/* Shared interaction rules. Keep the graphic yellow identity, refine the controls. */
+:root {
+  --control-height: 52px;
+  --touch-target: 44px;
+  --surface-shadow:
+    0 0 0 1px rgb(0 0 0 / 4%), 0 1px 2px rgb(0 0 0 / 3%),
+    0 3px 8px rgb(0 0 0 / 2%);
+}
+.ui-icon {
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+[dir="rtl"] .icon-directional {
+  scale: -1 1;
+}
+button {
+  touch-action: manipulation;
+}
+button:not(:disabled):not([data-static="true"]):not(:focus-visible):active {
+  scale: 0.96;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  scale: 1;
+}
+.phone button:focus-visible,
+.phone a:focus-visible,
+.phone summary:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  box-shadow: 0 0 0 4px var(--yellow);
+}
+.phone .icon-button,
+.phone .avatar-button {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  flex: none;
+}
+.phone :is(.button, .social-button, .graphic-action) {
+  min-height: var(--control-height);
+  line-height: 1.35;
+}
+.phone .button {
+  padding: 13px 18px;
+  gap: 10px;
+}
+.phone .button.primary,
+.phone .graphic-action {
+  border-radius: 6px;
+}
+.phone .button.primary {
+  padding-inline: 18px 16px;
+}
+.phone .button.secondary {
+  border: 1px solid #cfcec6;
+  background: #f8f8f4;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.phone .graphic-action {
+  overflow: hidden;
+}
+.phone .graphic-action > span:last-child {
+  width: 52px;
+}
+.phone .graphic-action > span:first-child {
+  font-size: 22px;
+  padding: 13px 16px;
+}
+.phone .social-button {
+  border-radius: 12px;
+}
+.phone .text-button,
+.phone .auth-switch button,
+.phone .demo-link,
+.home-footer button,
+.under-phone button {
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.phone .text-button {
+  font-size: 12px;
+}
+.phone .period-toggle {
+  padding: 4px;
+  border-radius: 14px;
+}
+.phone .period-toggle button {
+  min-height: 44px;
+  min-width: 64px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+}
+.phone .period-toggle button[aria-pressed="true"] {
+  background: var(--yellow);
+  color: var(--ink);
+}
+.total-top {
+  gap: 12px;
+}
+.phone .quick-actions button {
+  min-width: 52px;
+  min-height: 64px;
+  color: #c4c5bf;
+}
+.phone .quick-actions button > span {
+  width: 44px;
+  height: 44px;
+}
+.phone .bottom-nav {
+  width: min(280px, calc(100% - 48px));
+  padding: 8px;
+  border-radius: 32px;
+  gap: 4px;
+}
+.phone .bottom-nav button,
+.phone .bottom-nav button[aria-current="page"] {
+  flex: 1;
+  min-width: 0;
+  height: 48px;
+  padding: 0 8px;
+  border-radius: 24px;
+}
+.phone .bottom-nav button small {
+  display: block;
+  font-size: 10px;
+  font-weight: 550;
+}
+.phone .bottom-nav button[aria-current="page"] {
+  background: var(--yellow);
+}
+.phone .bottom-nav button:focus-visible {
+  outline-color: var(--yellow);
+  box-shadow: none;
+  outline-offset: 1px;
+}
+.phone.has-bottom-nav .app-scroll {
+  padding-bottom: 100px;
+}
+.phone .settings-group,
+.phone .subscription-list,
+.phone .detail-section {
+  box-shadow: var(--surface-shadow);
+}
+/* Full-width rows have an inset focus ring, so clipping never hides it. */
+.phone :is(.setting-row, .subscription-row, .activity-row):focus-visible {
+  outline-offset: -3px;
+  box-shadow: none;
+  border-radius: 10px;
+}
+.phone .setting-row {
+  min-height: 72px;
+}
+.phone .setting-row strong {
+  font-size: 13px;
+}
+.phone .setting-row small {
+  font-size: 11px;
+  line-height: 1.45;
+}
+.phone .setting-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+.phone .setting-value {
+  color: #696b63;
+  font-size: 11px;
+}
+.phone .switch {
+  width: 48px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  position: relative;
+}
+.phone .switch::before {
+  content: "";
+  position: absolute;
+  inset: 8px 0;
+  background: #c8cac2;
+  border-radius: 14px;
+  transition: background-color 150ms ease-out;
+}
+.phone .switch > span {
+  position: absolute;
+  left: 3px;
+  top: 11px;
+  width: 22px;
+  height: 22px;
+  transition: transform 150ms ease-out;
+}
+.phone .switch[aria-checked="true"]::before {
+  background: var(--ink);
+}
+.phone .switch[aria-checked="true"] > span {
+  transform: translateX(20px);
+  background: var(--yellow);
+}
+.phone .switch:focus-visible {
+  border-radius: 16px;
+  outline-offset: 1px;
+  box-shadow: none;
+}
+.phone input:not([type="checkbox"]),
+.phone select {
+  min-height: 52px;
+  font-size: 16px;
+  border-radius: 10px;
+  border-color: #c6c8bf;
+}
+.phone input:focus-visible,
+.phone select:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-color: var(--ink);
+}
+.phone input[aria-invalid="true"] {
+  border-color: #ad3e28;
+  outline-color: #ad3e28;
+  background: #fff8f5;
+}
+.phone .code-input {
+  font-size: 26px !important;
+}
+.phone .check-label {
+  min-height: 52px;
+  padding-block: 10px;
+}
+.phone .faq-list summary {
+  min-height: 52px;
+}
+.phone .search-box input {
+  margin-top: 0;
+  min-height: 44px;
+}
+.phone .search-box button {
+  min-width: 44px;
+  min-height: 44px;
+}
+/* The search/close pair changes context; navigation glyphs stay still. */
+.icon-swap {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+}
+.icon-swap > span {
+  display: grid;
+  place-items: center;
+  transition:
+    scale 300ms cubic-bezier(0.2, 0, 0, 1),
+    opacity 300ms cubic-bezier(0.2, 0, 0, 1),
+    filter 300ms cubic-bezier(0.2, 0, 0, 1);
+}
+.icon-swap-active {
+  position: absolute;
+  inset: 0;
+  scale: 0.25;
+  opacity: 0;
+  filter: blur(4px);
+}
+.icon-swap[data-active="true"] .icon-swap-default {
+  scale: 0.25;
+  opacity: 0;
+  filter: blur(4px);
+}
+.icon-swap[data-active="true"] .icon-swap-active {
+  scale: 1;
+  opacity: 1;
+  filter: blur(0);
+}
+button:focus-visible .icon-swap > span,
+.switch:focus-visible > span {
+  transition: none;
+}
+@starting-style {
+  .toast {
+    opacity: 0;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .phone
+    :is(.setting-row, .subscription-row, .activity-row):hover:not(:disabled) {
+    color: var(--ink);
+    background-color: #f6f5ed;
+  }
+  .phone .button.secondary:hover:not(:disabled) {
+    background: #efeee4;
+    border-color: #adada4;
+  }
+  .phone .icon-button:hover:not(:disabled) {
+    background: #e8e7de;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .phone button:active {
+    scale: 1 !important;
+    transform: none !important;
+  }
+  .icon-swap > span {
+    scale: 1 !important;
+    filter: none !important;
+  }
+  .switch > span {
+    transition: none;
+  }
+}
+
+.flow-shortcuts button {
+  min-height: var(--touch-target);
+}
+
+/* Keyboard actions stay instant even when focus moves into the search field. */
+[data-input="keyboard"] :is(button, .icon-swap > span, .switch > span) {
+  transition: none;
+}
+[data-input="keyboard"] button:active {
+  scale: 1;
+}
+
+/* Authentication and setup use the same comfortable action hierarchy. */
+.phone :is(.flow-login, .flow-signup) .social-buttons {
+  margin-top: 28px;
+  gap: 12px;
+}
+.phone :is(.social-button, .email-button) {
+  min-height: 56px;
+  padding: 14px 16px;
+  gap: 12px;
+  font-size: 14px;
+  border-radius: 12px;
+  text-align: left;
+}
+.phone .social-button {
+  border: 0;
+  box-shadow: var(--surface-shadow);
+}
+.phone .email-button {
+  background: #fff;
+  box-shadow: var(--surface-shadow);
+  font-weight: 550;
+}
+.phone :is(.social-button, .email-button) > svg {
+  width: 20px;
+  height: 20px;
+}
+.phone :is(.flow-login, .flow-signup) .or-divider {
+  margin: 22px 0;
+  font-size: 11px;
+  color: #696b63;
+}
+.phone :is(.flow-login, .flow-signup) .auth-switch {
+  margin-top: 20px;
+  font-size: 12px;
+}
+.phone .auth-switch button {
+  font-size: 12px;
+  padding-inline: 8px;
+}
+.phone .demo-disclosure {
+  font-size: 11px;
+  color: #696b63;
+}
+.phone .provider-auth-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  box-shadow: var(--surface-shadow);
+  margin: 8px 0 24px;
+}
+.phone .demo-account {
+  border: 1px solid #d8bd61;
+  background: #fff7da;
+  border-radius: 18px;
+  padding: 16px;
+  gap: 12px;
+}
+.phone .demo-account .avatar {
+  background: var(--yellow);
+  color: var(--ink);
+  width: 44px;
+  height: 44px;
+  font-weight: 700;
+}
+.phone .demo-account > svg {
+  color: var(--ink);
+}
+.phone .permission-list p {
+  color: #64675f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.phone .demo-code {
+  background: var(--accent-paper);
+  color: #514727;
+  padding: 14px 16px;
+  font-size: 12px;
+}
+.phone .demo-code strong {
+  color: var(--ink);
+}
+.phone .code-input {
+  letter-spacing: 0.28em;
+  padding-inline: 16px !important;
+  min-height: 64px;
+}
+.phone .form-error {
+  display: block;
+  padding: 12px 14px;
+  border-left: 3px solid #ad3e28;
+  background: #fff0e9;
+  border-radius: 0 8px 8px 0;
+}
+.setup-progress {
+  margin-bottom: 28px;
+}
+.progress-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #696b63;
+  margin-bottom: 10px;
+}
+.progress-caption strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.setup-progress .onboard-progress {
+  margin-bottom: 0;
+  gap: 6px;
+}
+.setup-progress .onboard-progress span {
+  height: 5px;
+}
+.setup-progress .onboard-progress .filled {
+  background: var(--ink);
+}
+.phone
+  :is(.flow-onboard-name, .flow-connect, .flow-reminders-setup, .flow-ready)
+  > .eyebrow {
+  margin-top: 0;
+}
+.phone .consent-card {
+  box-shadow: var(--surface-shadow);
+  padding: 20px;
+  border-radius: 20px;
+}
+.phone .consent-card p {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.phone .check-label {
+  border: 1px solid #cccec5;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 22px 0;
+  background: #fff;
+  gap: 12px;
+  cursor: pointer;
+}
+.phone .check-label:has(input:checked) {
+  background: var(--accent-paper);
+  border-color: #998134;
+}
+.phone .check-label:focus-within {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+.phone .check-label input {
+  width: 20px;
+  height: 20px;
+  min-height: 20px;
+  margin: 0;
+  flex: none;
+  accent-color: var(--ink);
+}
+.phone .check-label span {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.phone .notification-preview {
+  border: 0;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--surface-shadow);
+}
+.phone .notification-preview strong {
+  font-size: 12px;
+}
+.phone .notification-preview small {
+  color: #64675f;
+  font-size: 11px;
+}
+.phone .notification-preview > span:last-child {
+  font-size: 10px;
+  color: #696b63;
+}
+.phone .setup-summary {
+  background: #fff;
+  border: 0;
+  padding: 12px 16px;
+  border-radius: 16px;
+  box-shadow: var(--surface-shadow);
+}
+.phone .setup-summary p {
+  font-size: 12px;
+  color: #51554d;
+  line-height: 1.6;
+}
+.phone .setup-summary svg {
+  color: var(--ink);
+  flex: none;
+}
+.phone .flow-page .graphic-action:disabled {
+  background: #deded8;
+  box-shadow: none;
+  color: #60625c;
+}
+@media (hover: hover) and (pointer: fine) {
+  .phone .social-button:not(.apple-login):hover:not(:disabled),
+  .phone .email-button:hover:not(:disabled) {
+    background: #faf9f0;
+  }
+  .phone .social-button.apple-login:hover:not(:disabled) {
+    background: #363737;
+  }
+}
+@media (max-width: 360px) {
+  .phone :is(.flow-login, .flow-signup) .auth-stamp {
+    width: 48px;
+    height: 48px;
+    bottom: 8px;
+  }
+  .phone :is(.social-button, .email-button) {
+    font-size: 13px;
+  }
+  .phone .demo-account {
+    padding: 14px;
+    gap: 9px;
+  }
+  .phone .demo-account .avatar {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+@media (max-width: 360px) {
+  /* Let the longer signup headline keep its full width. */
+  .phone .flow-signup .auth-stamp {
+    display: none;
+  }
+}
+
+/* Account connections share the onboarding selection and touch-target language. */
+.phone .bank-account-picker {
+  border: 0;
+  padding: 0;
+  margin: 24px 0;
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+.phone .bank-account-picker legend {
+  font-size: 14px;
+  font-weight: 650;
+  margin-bottom: 12px;
+}
+.phone .bank-account-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 76px;
+  padding: 14px;
+  border: 1.5px solid #deded9;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+}
+.phone .bank-account-option:has(input:checked):not([data-connected]) {
+  border-color: #171717;
+  background: #fff3bb;
+}
+.phone .bank-account-option:focus-within {
+  outline: 3px solid #171717;
+  outline-offset: 3px;
+}
+.phone .bank-account-option input {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  accent-color: #171717;
+}
+.phone .bank-account-option > span:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+.phone .bank-account-option strong {
+  display: block;
+  font-size: 14px;
+}
+.phone .bank-account-option small {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+.phone .bank-account-option[data-connected] {
+  background: #eaeae6;
+  cursor: default;
+}
+.phone .connected-accounts-list {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+}
+.phone .connected-accounts-list .connected-account {
+  margin: 0;
+}
+.phone .connected-account .bank-symbol {
+  flex-shrink: 0;
+  background: #fff3bb;
+  color: #171717;
+}
+.phone .connected-account small {
+  font-size: 12px;
+  color: #62625e;
+}
+.phone .connected-account > p,
+.phone .connected-account .account-access {
+  color: #62625e;
+  font-size: 12px;
+}
+.phone .connected-account > .text-button {
+  min-height: 48px;
+  padding-bottom: 8px;
+}

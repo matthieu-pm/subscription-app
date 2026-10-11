@@ -1,0 +1,17 @@
+node_modules
+dist
+.DS_Store
+
+# Local credentials and tooling
+.env
+.env.*
+!.env.example
+.vercel/
+.expo/
+.claude/
+*.tsbuildinfo
+*.log
+
+# Local previews and session QR codes
+screenshots/
+artifacts/
