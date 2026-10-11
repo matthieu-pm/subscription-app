@@ -15,3 +15,5 @@ dist
 # Local previews and session QR codes
 screenshots/
 artifacts/
+.vercel
+.env*.local
