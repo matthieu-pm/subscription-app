@@ -21,6 +21,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurTargetView, BlurView } from "expo-blur";
+import MaskedView from "@react-native-masked-view/masked-view";
 import {
   useFonts,
   Geist_400Regular,
@@ -1843,24 +1844,43 @@ function AppContent() {
                     position: "absolute",
                     inset: 0,
                     top: -headerInset,
+                    bottom: -32,
                     pointerEvents: "none",
-                    backdropFilter: "blur(16px)",
-                    WebkitBackdropFilter: "blur(16px)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    maskImage:
+                      "linear-gradient(to bottom, black calc(100% - 64px), transparent)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, black calc(100% - 64px), transparent)",
                   }}
                 />
               ) : (
-                <BlurView
+                <MaskedView
                   pointerEvents="none"
-                  intensity={80}
-                  tint="default"
-                  style={[StyleSheet.absoluteFill, { top: -headerInset }]}
-                  {...(Platform.OS === "android"
-                    ? {
-                        blurTarget: headerBlurTarget,
-                        blurMethod: "dimezisBlurViewSdk31Plus" as const,
-                      }
-                    : {})}
-                />
+                  style={[
+                    StyleSheet.absoluteFill,
+                    { top: -headerInset, bottom: -32 },
+                  ]}
+                  maskElement={
+                    <LinearGradient
+                      colors={["#000000", "#000000", "#00000000"]}
+                      locations={[0, (headerInset + 28) / (headerInset + 92), 1]}
+                      style={StyleSheet.absoluteFill}
+                    />
+                  }
+                >
+                  <BlurView
+                    intensity={35}
+                    tint="default"
+                    style={StyleSheet.absoluteFill}
+                    {...(Platform.OS === "android"
+                      ? {
+                          blurTarget: headerBlurTarget,
+                          blurMethod: "dimezisBlurViewSdk31Plus" as const,
+                        }
+                      : {})}
+                  />
+                </MaskedView>
               )}
               {route === "home" ? (
                 <View style={s.topbar}>

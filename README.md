@@ -2,7 +2,7 @@
 
 ## Repository and shared testing
 
-This repository contains both prototypes. Vercel serves the current Expo app from `mobile-revolut`; the root Vite app is the earlier design. The GitHub repository is https://github.com/matthieu-pm/subscription-app.
+This repository contains both prototypes. The [blue Expo prototype](https://subscription-app-alpha-vert.vercel.app) is served by the `subscription-app` Vercel project from `mobile-revolut`. The [yellow Vite prototype](https://subscript-yellow-prototype.vercel.app) is served separately by `subscript-yellow-prototype` from the repository root. The GitHub repository is https://github.com/matthieu-pm/subscription-app.
 
 To update the shared app, commit and push to `main`. Vercel builds `mobile-revolut` using `npm ci` and `npm run build:web`, then publishes `dist`. No backend or environment variables are needed.
 
@@ -95,3 +95,9 @@ The yellow-and-black app now uses the local `mobile-revolut/App.tsx` prototype a
 - Help covers monthly equivalents, estimated renewals, multiple accounts, and cancellation. For example, a €120 yearly plan contributes €10 to the monthly total.
 
 Validation: production build, seven model tests, and diff checks pass. Browser checks covered email sign-in, sample-only setup, Apple TV detail/edit/cancellation, the €39 → €29 total, profile/settings, and expanded help answers. Inspected welcome/home/cancellation at 390 × 844 and settings/help at 320 × 700; the narrow page width remained 320 px and the test tab reported no console errors or warnings. Screenshots: `screenshots/content-home.jpg` and `screenshots/content-cancellation.jpg`. No changes were made to the native Revolut prototype.
+
+## Current workshop presentation
+
+[Workshop presentation, revision 4](presentation/output/Subscript-UX-Writing-Final-Workshop-v4.pptx) includes the refreshed voice examples, current live blue-prototype screenshots, and links to both live prototypes. The yellow production deployment was updated and browser-verified on 12 October 2026.
+
+[Yellow workshop presentation](presentation/output/Subscript-UX-Writing-Final-Workshop-Yellow.pptx) keeps the same nine-slide content with the yellow prototype’s Barlow Condensed and DM Sans typography, warm paper and yellow palette, current screenshots, and a QR code for the yellow demo.

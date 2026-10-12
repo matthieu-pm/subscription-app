@@ -21,6 +21,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurTargetView, BlurView } from "expo-blur";
+import MaskedView from "@react-native-masked-view/masked-view";
 import {
   useFonts,
   Geist_400Regular,
@@ -496,10 +497,10 @@ function AppContent() {
     accounts: "Linked accounts",
     banks: "Choose your bank",
     consent: "Connect your account",
-    detected: "We found your subscriptions",
+    detected: "Meet your regulars",
     settings: "Settings",
     notifications: "Notifications",
-    help: "How can we help?",
+    help: "Glad you asked",
     privacy: "Your data",
     insights: "Subscription spending",
     "edit-profile": "Personal details",
@@ -507,7 +508,7 @@ function AppContent() {
     add: "Add a subscription",
     cancel: "How to cancel",
     provider: "Provider preview",
-    "reminders-setup": "Stay one step ahead",
+    "reminders-setup": "A little heads-up",
   };
   const subrow = (it: Subscription) => (
     <Pressable
@@ -582,10 +583,10 @@ function AppContent() {
                 {route === "welcome" && (
                   <>
                     <T style={s.welcomeTitle}>
-                      {"ALL YOUR\nSUBSCRIPTIONS.\nONE PLACE."}
+                      {"THEY RENEW.\nYOU REMEMBER."}
                     </T>
                     <T style={s.welcomeSub}>
-                      See what’s coming. Keep what you love.
+                      Your subscriptions have a way of adding up. Let’s keep them in sight.
                     </T>
                     <View style={s.heroWrap}>
                       <Image
@@ -611,8 +612,7 @@ function AppContent() {
                   <>
                     <T style={s.title}>Let’s get started</T>
                     <T style={s.description}>
-                      Keep your subscriptions together. Enter your email to try
-                      the sign-in flow.
+                      A little setup now. Less “what was that charge?” later.
                     </T>
                     <Field
                       label="Email address"
@@ -622,14 +622,14 @@ function AppContent() {
                       placeholder="you@example.com"
                     />
                     <T style={s.footnote}>
-                      Demo sign-in. No email will be sent.
+                      Your inbox can sit this one out. No email is sent.
                     </T>
                     <View style={{ marginTop: 28 }}>
                       <Button
                         label="Continue"
                         onPress={() => {
                           if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                            setError("Enter a valid email address.");
+                            setError("Check your email address. It should look like you@example.com.");
                             return;
                           }
                           setCode("");
@@ -670,8 +670,8 @@ function AppContent() {
                 )}
                 {route === "name" && (
                   <>
-                    <T style={s.title}>Your profile</T>
-                    <T style={s.description}>Let’s make this feel like you.</T>
+                    <T style={s.title}>Let’s make this yours</T>
+                    <T style={s.description}>What should we call you?</T>
                     <View style={s.profileAvatar}>
                       <T
                         style={{
@@ -704,11 +704,11 @@ function AppContent() {
                     </View>
                     <T style={s.title}>All together now</T>
                     <T style={s.description}>
-                      Link your accounts to spot recurring payments and see your
-                      subscriptions in one place.
+                      Different accounts. Same you. Try a demo connection
+                      or take a look around with sample subscriptions.
                     </T>
                     <Group>
-                      <Row icon="bank" title="Multiple accounts, one view" />
+                      <Row icon="bank" title="Less hopping between accounts" />
                       <Row
                         icon="shield"
                         title="You’re always in control"
@@ -850,7 +850,7 @@ function AppContent() {
                         sub={
                           data.accounts.length
                             ? `${data.accounts.length} accounts connected`
-                            : "Bring your accounts together"
+                            : "Different banks, all together"
                         }
                         onPress={() => go("accounts")}
                       />
@@ -958,9 +958,15 @@ function AppContent() {
                         ) && (
                           <View style={s.empty}>
                             <Icon name="repeat" size={40} />
-                            <T style={s.sectionTitle}>No subscriptions here</T>
+                            <T style={s.sectionTitle}>
+                              {query ? "No match this time" : filter === "cancelled" ? "No goodbyes yet" : "Who’s first?"}
+                            </T>
                             <T style={s.description}>
-                              Try another search or add a subscription.
+                              {query
+                                ? "Try a different name or clear your search."
+                                : filter === "cancelled"
+                                  ? "Subscriptions you mark as cancelled will live here."
+                                  : "Streaming, storage, that thing you signed up for. Tap + to add a subscription."}
                             </T>
                           </View>
                         )}
@@ -971,8 +977,8 @@ function AppContent() {
                     ) : (
                       <>
                         <T style={s.description}>
-                          Your recorded payments, including subscriptions you’ve
-                          cancelled or stopped tracking.
+                          A little less “what was that charge?” Your payment history
+                          stays here, even after you stop tracking a subscription.
                         </T>
                         {data.items
                           .filter((x) =>
@@ -1129,8 +1135,8 @@ function AppContent() {
                   <>
                     <T style={s.description}>
                       {route === "edit"
-                        ? "Keep your subscription details up to date."
-                        : "Track a recurring payment in one place."}
+                        ? "Something changed? Update your details here. Your plan with the provider stays the same."
+                        : "One less thing to keep in your head. Add what you pay and when it renews."}
                     </T>
                     <Field
                       label="Subscription name"
@@ -1182,8 +1188,8 @@ function AppContent() {
                       Cancel with {item.name}
                     </T>
                     <T style={s.description}>
-                      Your subscription is managed by the provider. You’ll need
-                      to cancel there first.
+                      Ready to part ways? Cancel with the company that bills you
+                      first, then come back to update Subscript.
                     </T>
                     <Group>
                       <Row
@@ -1337,7 +1343,7 @@ function AppContent() {
                 )}
                 {route === "accounts" && (
                   <>
-                    <T style={s.description}>All your accounts, together.</T>
+                    <T style={s.description}>Personal, joint, here, there. Your demo accounts, together.</T>
                     {data.accounts.map((a) => (
                       <Group key={a.id}>
                         <Row
@@ -1364,9 +1370,9 @@ function AppContent() {
                     {!data.accounts.length && (
                       <View style={s.empty}>
                         <Icon name="bank" size={44} />
-                        <T style={s.sectionTitle}>Link your first account</T>
+                        <T style={s.sectionTitle}>No accounts? No rush.</T>
                         <T style={s.description}>
-                          Find recurring payments across your banks.
+                          Try connecting a demo account, or keep exploring with sample subscriptions. Your call.
                         </T>
                       </View>
                     )}
@@ -1378,8 +1384,7 @@ function AppContent() {
                       }}
                     />
                     <T style={s.footnote}>
-                      Fictional accounts only. No bank credentials are
-                      requested.
+                      Demo accounts only. No banking details needed.
                     </T>
                   </>
                 )}
@@ -1506,8 +1511,8 @@ function AppContent() {
                 {route === "detected" && (
                   <>
                     <T style={s.description}>
-                      Review these sample recurring payments. You can edit or
-                      remove them later.
+                      Here’s a sample lineup to get you started. Take a look.
+                      You can edit or remove any of these later.
                     </T>
                     <Group>{active.map(subrow)}</Group>
                     <Button
@@ -1527,7 +1532,7 @@ function AppContent() {
                 {(route === "notifications" || route === "reminders-setup") && (
                   <>
                     <T style={s.description}>
-                      A little heads-up before your next payment.
+                      Renewals have a habit of sneaking up. How much notice would you like?
                     </T>
                     <Group>
                       <Row
@@ -1597,7 +1602,7 @@ function AppContent() {
                       You’re all set
                     </T>
                     <T style={[s.description, { textAlign: "center" }]}>
-                      Your subscriptions have a new home.
+                      That’s the setup sorted. Your subscriptions have a home here now.
                     </T>
                     <Button label="Go to my subscriptions" onPress={finish} />
                   </>
@@ -1726,7 +1731,7 @@ function AppContent() {
                       <Row
                         icon="shield"
                         title="Stored on this device"
-                        sub="Your demo edits and preferences stay in local app storage."
+                        sub="Your demo edits and preferences are saved on this device."
                       />
                       <Row
                         icon="bank"
@@ -1763,7 +1768,7 @@ function AppContent() {
                       },
                       {
                         q: "Can I connect more than one account?",
-                        a: "Yes. Choose personal or joint demo accounts at the same bank, or connect different banks. The same account cannot be added twice.",
+                        a: "Absolutely. Personal, joint, same bank or different banks. Pick your demo accounts; we’ll keep each one listed just once.",
                       },
                     ].map((v, i) => (
                       <View key={v.q}>
@@ -1839,24 +1844,43 @@ function AppContent() {
                     position: "absolute",
                     inset: 0,
                     top: -headerInset,
+                    bottom: -32,
                     pointerEvents: "none",
-                    backdropFilter: "blur(16px)",
-                    WebkitBackdropFilter: "blur(16px)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
+                    maskImage:
+                      "linear-gradient(to bottom, black calc(100% - 64px), transparent)",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, black calc(100% - 64px), transparent)",
                   }}
                 />
               ) : (
-                <BlurView
+                <MaskedView
                   pointerEvents="none"
-                  intensity={80}
-                  tint="default"
-                  style={[StyleSheet.absoluteFill, { top: -headerInset }]}
-                  {...(Platform.OS === "android"
-                    ? {
-                        blurTarget: headerBlurTarget,
-                        blurMethod: "dimezisBlurViewSdk31Plus" as const,
-                      }
-                    : {})}
-                />
+                  style={[
+                    StyleSheet.absoluteFill,
+                    { top: -headerInset, bottom: -32 },
+                  ]}
+                  maskElement={
+                    <LinearGradient
+                      colors={["#000000", "#000000", "#00000000"]}
+                      locations={[0, (headerInset + 28) / (headerInset + 92), 1]}
+                      style={StyleSheet.absoluteFill}
+                    />
+                  }
+                >
+                  <BlurView
+                    intensity={35}
+                    tint="default"
+                    style={StyleSheet.absoluteFill}
+                    {...(Platform.OS === "android"
+                      ? {
+                          blurTarget: headerBlurTarget,
+                          blurMethod: "dimezisBlurViewSdk31Plus" as const,
+                        }
+                      : {})}
+                  />
+                </MaskedView>
               )}
               {route === "home" ? (
                 <View style={s.topbar}>
@@ -2079,7 +2103,7 @@ function AppContent() {
                         ),
                       });
                       setSuccess(
-                        `${item.name} is marked as cancelled. We’ve updated your totals. Your payment history is still in Activity.`,
+                        `${item.name} is marked as cancelled. One less thing to keep track of. Your totals are updated; past payments stay in Activity. This records your cancellation without verifying it with the provider.`,
                       );
                       setSheet("success");
                       setRoute("detail");

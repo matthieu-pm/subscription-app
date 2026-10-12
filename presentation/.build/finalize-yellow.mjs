@@ -1,0 +1,6 @@
+import path from 'node:path';
+const ROOT='/Users/matthieu/Projects/subscription-app',BUILD=path.join(ROOT,'presentation/.build');
+const SKILL='/Users/matthieu/.codex/plugins/cache/openai-primary-runtime/presentations/26.1009.11318/skills/presentations';
+const {finalizePresentation}=await import(path.join(SKILL,'container_tools/artifact_tool_utils.mjs'));
+const result=await finalizePresentation({workspaceDir:ROOT,candidatePath:path.join(BUILD,'candidate-yellow.pptx'),finalPath:path.join(ROOT,'presentation/output/Subscript-UX-Writing-Final-Workshop-Yellow.pptx'),pythonExecutable:'/Users/matthieu/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3',integrityValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_package_integrity.py'),layoutValidatorPath:path.join(SKILL,'container_tools/inspect_presentation_layout_geometry.py'),layoutArgs:['--expected-slide-size-emu','15240000,8572500','--validate-bullet-geometry','--validate-heading-fit','--require-native-table-slide','3'],explicitTotalSlideCount:9,requiredNativeTableOwnerSlides:[3],fontPolicy:{basis:'design',families:['Barlow Condensed','DM Sans']},verifyArtifactToolImport:true,receiptPath:path.join(BUILD,'validation-yellow.json')});
+console.log(JSON.stringify(result));
