@@ -8,14 +8,29 @@ To update the shared app, commit and push to `main`. Vercel builds `mobile-revol
 
 A mobile-first subscription-management prototype built with React, TypeScript, and Vite. The latest direction uses light finance surfaces, white grouped cards, a charcoal summary card, and floating black navigation. Bold condensed headings, yellow highlights, and outlined actions carry through login, onboarding, subscription details, profile, and settings. Welcome and authentication include graphic artwork and split arrow buttons from the supplied taxi-app reference. DM Sans and Barlow Condensed are bundled locally. The earlier Revolut styling direction was superseded.
 
-## Run
+## Install
+
+Requires Git, Node.js, npm, and access to the GitHub repository. Run this from the folder where you want to install the repo. It clones the repository and installs dependencies for both prototypes.
 
 ```sh
-npm install
+git clone https://github.com/matthieu-pm/subscription-app.git && cd subscription-app && npm ci && npm --prefix mobile-revolut ci
+```
+
+## Run
+
+Start the web prototype from the repository root:
+
+```sh
 npm run dev
 ```
 
 Open http://localhost:5173. On desktop, the app is presented in a phone frame; on mobile, it fills the viewport.
+
+To start the iPhone prototype instead, run the following from the repository root, then scan the terminal QR with Expo Go:
+
+```sh
+npm run mobile
+```
 
 ```sh
 npm run build
